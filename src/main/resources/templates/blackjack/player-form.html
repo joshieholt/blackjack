@@ -1,0 +1,24 @@
+<div>
+	Player Name: {{ playerName }}
+</div>
+<div>
+	Wallet Amount: $ {{ walletAmount }}
+</div>
+Hand:
+{{ #playerCards }}
+	<div>{{ . }}</div>
+{{ /playerCards }} 
+<br>
+Values:
+{{ #playerValues }}
+	<div>{{ . }}</div>
+{{ /playerValues }}
+
+{{ #doShowPlayerButtons }}
+	<form method="post" action="/blackjack/game/hit">
+		<button>HIT</button>
+	</form>
+	<form method="post" action="/blackjack/game/stand">
+		<button>STAND</button>
+	</form>
+{{ /doShowPlayerButtons }}
