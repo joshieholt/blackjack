@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700');
+
+* {
+	box-sizing: border-box;
+}
+
+html, body, input, select, textarea, button {
+  font-family: 'Roboto', sans-serif;
+}
+
+html, body {
+  font-size: 14px;
+}
+
+input, button {
+  font-size: 16px;
+}
+
+input[type="text"],
+input[type="number"] {
+  border: 0;
+  border-left: 4px solid transparent;
+  border-bottom: 2px solid #ECECEC;
+  outline: 0;
+  padding: 4px 0;
+}
+
+input[type="text"]:invalid,
+input[type="number"]:invalid {
+  border-left-color: #c5162c;
+  outline: 0;
+  box-shadow: none;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+  border-bottom-color: #FF5555;
+}
+
+button {
+  border-radius: 12px;
+  padding: 4px 8px;
+  border: 2px solid transparent;
+  background-color: #FF5555;
+  color: white;
+  outline: 0;
+  width: 100px;
+}
+
+button:focus,
+button:hover {
+  border-color: #FF5555;
+  background-color: transparent;
+  color: #FF5555;
+}
+
+button:active {
+  border-color: #FF5555;
+  background-color: #ff8982;
+  color: black;
+}
+
+.card-class {
+  display: inline-block;
+  width: 50px;
+  height: 75px;
+  border: 2px solid;
+  padding-top: 25px;
+  text-align: center;
+}

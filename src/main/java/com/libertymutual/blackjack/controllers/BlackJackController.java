@@ -179,13 +179,13 @@ public class BlackJackController {
 			playerWinLossAmount = 0;
 			messageToPlayer = "Something weird must have happened...but we're keeping your $" + currentBet + " bet for good measure.";
 		}
+		player1.adjustWalletAmount(playerWinLossAmount);
 		return "redirect:/blackjack/game/end-hand";
 	}
 	
 	@GetMapping("/game/end-hand")
 	public String endHand(Model model) {
 		currentPot = 0;
-		player1.adjustWalletAmount(playerWinLossAmount);
 		model.addAttribute("messageToPlayer", messageToPlayer);
 		model.addAttribute("walletAmount", player1.getWalletAmount());
 		model.addAttribute("playerCards", player1.getAllCards());
@@ -202,6 +202,7 @@ public class BlackJackController {
 		showPlayAgainButton = false;
 		messageToPlayer = "The deck is out of cards. Game Over!";
 		playerWinLossAmount = currentBet;
+		player1.adjustWalletAmount(playerWinLossAmount);
 		return "redirect:/blackjack/game/end-hand";
 	}
 	
@@ -209,6 +210,7 @@ public class BlackJackController {
 	public String noMoreMoney() {
 		showPlayAgainButton = false;
 		messageToPlayer = "You are out of money. Game Over!";
+		player1.adjustWalletAmount(playerWinLossAmount);
 		return "redirect:/blackjack/game/end-hand";
 	}
 	
@@ -216,6 +218,7 @@ public class BlackJackController {
 	public String pleaseBetLess(Model model) {
 		showPlayAgainButton = true;
 		messageToPlayer = "Please bet no more than $" + player1.getWalletAmount() + "!";
+		player1.adjustWalletAmount(playerWinLossAmount);
 		return "redirect:/blackjack/game/end-hand";
 	}
 	

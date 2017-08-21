@@ -7,7 +7,7 @@ public class Deck {
 	private int currentCardIndex;
 	
 	public Deck() {
-		String[] suits = new String[] { "clubs", "spades", "hearts", "diamonds"};
+		String[] suits = new String[] { "Clubs", "Spades", "Hearts", "Diamonds"};
 	int i = 0;
 	cards = new Card[52];
 	currentCardIndex = 0;

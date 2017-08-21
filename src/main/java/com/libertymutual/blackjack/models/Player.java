@@ -7,9 +7,9 @@ public class Player {
 	
 	private String name;
 	private Hand hand;
-	private int wallet;
+	private double wallet;
 	
-	public Player(String name, Hand hand, int wallet) {
+	public Player(String name, Hand hand, double wallet) {
 		this.name = name;
 		this.hand = hand;
 		this.wallet = wallet;
@@ -23,7 +23,7 @@ public class Player {
 		wallet += amount;
 	}
 	
-	public int getWalletAmount() {
+	public double getWalletAmount() {
 		return wallet;
 	}
 	
