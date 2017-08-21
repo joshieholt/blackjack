@@ -14,7 +14,7 @@ import com.libertymutual.blackjack.models.Player;
 @Controller
 @RequestMapping("/blackjack") 
 public class BlackJackController {
-	Deck deck = new Deck();
+	Deck deck;
 	Player player1;
 	Player dealer;
 	int currentPot;
@@ -54,8 +54,29 @@ public class BlackJackController {
 		
 	}
 	
+	@PostMapping ("/game/start") 
+	public String startingTheGame(Model model) {
+		deck = null;
+		deck = new Deck();
+		
+		deck.shuffleDeck();
+		
+		Hand dealerHand = new Hand();
+		player1 = null;
+		dealer = new Player("Dealer", dealerHand, 0);
+		currentPot = 0;
+		showPlayAgainButton = true;
+		model.addAttribute("walletAmount", 100);
+		return "blackjack/new-game-form";
+	}
+	
 	@PostMapping ("/game/bet")
-	public String makeBet(int playerBet, String playerName){
+	public String makeBet(double playerBet, String playerName){
+		if (playerBet <= 0) {
+			playerWinLossAmount = 0;
+			return "redirect:/blackjack/game/please-bet-more";
+		}
+		currentBet = playerBet;
 		Hand playerHand = new Hand();
 		if (player1 == null) {
 			player1 = new Player(playerName, playerHand, 100);
@@ -96,21 +117,7 @@ public class BlackJackController {
 		dontShowDealerCard = true;
 		doShowDealerCard = false;
 		doShowPlayerButtons = true;
-		return "redirect:/blackjack/game";
-		
-	}
-	
-	@PostMapping ("/game/start") 
-	public String startingTheGame(Model model) {
-		deck.shuffleDeck();
-		
-		Hand dealerHand = new Hand();
-		player1 = null;
-		dealer = new Player("Dealer", dealerHand, 0);
-		currentPot = 0;
-		showPlayAgainButton = true;
-		model.addAttribute("walletAmount", 100);
-		return "blackjack/new-game-form";
+		return "redirect:/blackjack/game";		
 	}
 
 	@PostMapping ("/game/hit") 
@@ -218,6 +225,14 @@ public class BlackJackController {
 	public String pleaseBetLess(Model model) {
 		showPlayAgainButton = true;
 		messageToPlayer = "Please bet no more than $" + player1.getWalletAmount() + "!";
+		player1.adjustWalletAmount(playerWinLossAmount);
+		return "redirect:/blackjack/game/end-hand";
+	}
+	
+	@GetMapping("/game/please-bet-more")
+	public String pleaseBetMore(Model model) {
+		showPlayAgainButton = true;
+		messageToPlayer = "Please bet greater than $0!";
 		player1.adjustWalletAmount(playerWinLossAmount);
 		return "redirect:/blackjack/game/end-hand";
 	}
