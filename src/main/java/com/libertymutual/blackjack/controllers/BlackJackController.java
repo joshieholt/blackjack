@@ -100,8 +100,6 @@ public class BlackJackController {
 		
 	}
 	
-	
-	
 	@PostMapping ("/game/start") 
 	public String startingTheGame(Model model) {
 		deck.shuffleDeck();
@@ -141,21 +139,6 @@ public class BlackJackController {
 		}
 		return "redirect:/blackjack/game/determine-winner";
 	}
-	
-//	@GetMapping ("game/deal-to-dealer")
-//	public String dealToDealer(Model model) {
-//		int [] values = dealer.getValues();
-//		while (values[0] < 17 && values[1] < 17) {
-//			if (deck.hasCards()) {
-//				dealer.addCard(deck.dealCard());
-//			} else {
-//				return "redirect:/blackjack/game/no-more-cards";
-//			}
-//			values = dealer.getValues(); 
-//		}
-//		
-//		return "redirect:/blackjack/game/end-hand";
-//	}
 	
 	@GetMapping("/game/determine-winner")
 	public String determineWinner() {
@@ -210,32 +193,15 @@ public class BlackJackController {
 		model.addAttribute("showPlayAgainButton", showPlayAgainButton);
 		model.addAttribute("dealerBestHand", dealer.getBestHand());
 		model.addAttribute("playerBestHand", player1.getBestHand());
+		model.addAttribute("remainingCards", deck.remainingCards());
 		return "blackjack/end-hand";
 	}
-	
-//	@GetMapping("/game/bust")
-//	public String busted(Model model) {
-//		currentPot = 0;
-//		model.addAttribute("walletAmount", player1.getWalletAmount());
-//		model.addAttribute("playerCards", player1.getAllCards());
-//		model.addAttribute("dealerCards", dealer.getAllCards());
-//		model.addAttribute("messageToPlayer" , "you busted!");
-//		model.addAttribute("showPlayAgainButton", showPlayAgainButton);
-//		player1.clearHand();
-//		dealer.clearHand();
-//		return "blackjack/end-hand";
-//	}
 	
 	@GetMapping("/game/no-more-cards")
 	public String noMoreCards() {
 		showPlayAgainButton = false;
 		messageToPlayer = "The deck is out of cards. Game Over!";
-		playerWinLossAmount = 0;
-//		model.addAttribute("walletAmount", player1.getWalletAmount());
-//		model.addAttribute("playerCards", player1.getAllCards());
-//		model.addAttribute("dealerCards", dealer.getAllCards());
-//		model.addAttribute("messageToPlayer" , "The deck is out of cards.  Game Over!");
-//		model.addAttribute("showPlayAgainButton", showPlayAgainButton);
+		playerWinLossAmount = currentBet;
 		return "redirect:/blackjack/game/end-hand";
 	}
 	
@@ -243,11 +209,6 @@ public class BlackJackController {
 	public String noMoreMoney() {
 		showPlayAgainButton = false;
 		messageToPlayer = "You are out of money. Game Over!";
-//		model.addAttribute("walletAmount", player1.getWalletAmount());
-//		model.addAttribute("playerCards", player1.getAllCards());
-//		model.addAttribute("dealerCards", dealer.getAllCards());
-//		model.addAttribute("messageToPlayer" , "You are out of money.  Game Over!");
-//		model.addAttribute("showPlayAgainButton", showPlayAgainButton);
 		return "redirect:/blackjack/game/end-hand";
 	}
 	
@@ -255,11 +216,6 @@ public class BlackJackController {
 	public String pleaseBetLess(Model model) {
 		showPlayAgainButton = true;
 		messageToPlayer = "Please bet no more than $" + player1.getWalletAmount() + "!";
-//		model.addAttribute("walletAmount", player1.getWalletAmount());
-//		model.addAttribute("playerCards", player1.getAllCards());
-//		model.addAttribute("dealerCards", dealer.getAllCards());
-//		model.addAttribute("messageToPlayer" , "Please bet no more than $" + player1.getWalletAmount() + "!");
-//		model.addAttribute("showPlayAgainButton", showPlayAgainButton);
 		return "redirect:/blackjack/game/end-hand";
 	}
 	
