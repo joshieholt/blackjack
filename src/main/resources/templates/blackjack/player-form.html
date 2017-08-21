@@ -9,10 +9,7 @@ Hand:
 	<div>{{ . }}</div>
 {{ /playerCards }} 
 <br>
-Values:
-{{ #playerValues }}
-	<div>{{ . }}</div>
-{{ /playerValues }}
+<div>Best Hand: {{ playerBestHand }}</div>
 
 {{ #doShowPlayerButtons }}
 	<form method="post" action="/blackjack/game/hit">

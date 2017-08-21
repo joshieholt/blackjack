@@ -1,12 +1,12 @@
 
 package com.libertymutual.blackjack.models;
 
-import java.awt.List;
 import java.util.ArrayList;
 
 public class Hand {
 
 	private ArrayList<Card> cards;
+	
 	public Hand() {
 		cards = new ArrayList<Card>();
 	}
@@ -43,6 +43,38 @@ public class Hand {
 	public void clearHand() {
 		while (!cards.isEmpty()) {
 			cards.remove(0);
+		}
+	}
+	
+	public boolean isBusted() {
+		int[] values = getValues();
+		if (values[0] > 21 && values[1] > 21) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public boolean hasBlackJack() {
+		if (cards.size() != 2) {
+			return false;
+		} else if (getBestHand() == 21) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public int getBestHand() {
+		int[] values = getValues();
+		if (values[0] == 21 || values[1] == 21) {
+			return 21;
+		} else if (values[0] < 22 && values[0] > values[1]) {
+			return values[0];
+		} else if (values[1] > 21) {
+			return values[0];
+		} else {
+			return values[1];
 		}
 	}
 }

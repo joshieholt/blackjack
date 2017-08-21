@@ -96,82 +96,9 @@ public class Deck {
 			return false;
 		}
 	}
+	
+	public int remainingCards() {
+		return cards.length - currentCardIndex;
+	}
 }
 
-
-
-
-
-//import java.util.Collections;
-//import java.util.Stack;
-//
-//public class Deck {
-//
-//	private Card[] cardArray;
-//	private Stack<Card> cardStack;
-//	
-//	public Deck() {
-//		String[] suit = new String[] { "Club", "Diamond", "Heart", "Spade" };
-//		cardStack = new Stack<Card>();
-//		cardArray = new Card[52];
-//		int i = 0;
-//		
-//		for (String s : suit) {
-//			cardArray[i] = new AceCard(s);
-//			i += 1;
-//			
-//			cardArray[i] = new FaceCard(s, "King");
-//			i += 1;
-//			cardArray[i] = new FaceCard(s, "Queen");
-//			i += 1;
-//			cardArray[i] = new FaceCard(s, "Jack");
-//			i += 1;
-//			
-//			for (int j = 2; j < 11; j += 1) {
-//				cardArray[i] = new NumberCard(s, j);
-//				i += 1;
-//			}
-//		}
-//		pushCardsOntoCardStackFromCardArray();
-//	}
-//	
-//	
-//	public void shuffle() {
-//		for (int i = 0; i < 7; i += 1) {
-//			for (int j = 0; j < 52; j += 1) {
-//				Card tempCard;
-//				int k = j + (int)(Math.random() * (52-j));
-//				tempCard = cardArray[k];
-//				cardArray[k] = cardArray[j];
-//				cardArray[j] = tempCard;
-//			}
-//		}
-//		
-//		popCardsOffOfCardStack();
-//		pushCardsOntoCardStackFromCardArray();
-//		
-//	}
-//	
-//	public void printCards() {
-//		for (int i = 0; i < cardStack.size(); i += 1) {
-//			Card tempCard = cardStack.elementAt(i);
-//			System.out.println((i+1) + "; " + tempCard.getName() + " " + tempCard.getSuit());
-//		}
-//	}
-//	
-//	private void pushCardsOntoCardStackFromCardArray() {
-//		for (int i = 0; i < 52; i += 1) {
-//			cardStack.push(cardArray[i]);
-//		}
-//	}
-//	
-//	private void popCardsOffOfCardStack() {
-//		while (cardStack.size() > 0) {
-//			cardStack.pop();
-//		}
-//	}
-//	
-//	public Card dealCard() {
-//		return cardStack.pop();		
-//	}
-//}

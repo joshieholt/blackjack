@@ -12,11 +12,15 @@
 		{{ #dealerCards }}
 			<div>{{ . }}</div>
 		{{ /dealerCards }}
+		<br>
+		<div>Dealer Best Hand: {{ dealerBestHand }}</div>
 		<hr>
 		Your Cards:
 		{{ #playerCards }}
 			<div>{{ . }}</div>
 		{{ /playerCards }} 
+		<br>
+		<div>Player Best Hand: {{ playerBestHand }}</div>
 		{{ #showPlayAgainButton }}
 			<form method="post" action="/blackjack/game/bet">
 				<input type="number" name="playerBet" value="" required>
@@ -26,5 +30,7 @@
 		<form method="post" action="/blackjack">
 			<button>end game</button>
 		</form>
+		<br>
+  		<div>Deck has {{ remainingCards }} cards remaining</div>
 	</body>
 </html>
